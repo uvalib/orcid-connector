@@ -1,12 +1,10 @@
-<div id='dashboard'>
-  <% if @orcid_user.present? %>
+<%= content_tag :div,
+  id: 'vue',
+  data: {
+    user: @user.as_json,
+  } do %>
+  <h1>Link your ORCiD account</h1>
+  <orcid-button />
+<%end%>
 
-
-  <%else%>
-    <h1>Link your ORCiD account</h1>
-    <orcid-button />
-
-
-  <%end%>
-</div>
 

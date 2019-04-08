@@ -9,7 +9,12 @@ class Orcid
 
 
   def self.find_user cid
-    self.get("/cid/#{cid}", query: auth)
+    response = self.get("/cid/#{cid}", query: auth)
+    if response.success?
+      response['results'].first
+    else
+      {}
+    end
   end
 
 end

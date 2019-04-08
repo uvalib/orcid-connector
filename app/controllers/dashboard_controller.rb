@@ -1,8 +1,10 @@
 class DashboardController < ApplicationController
+
   def show
-    #@orcid_user = Orcid.find_user(@user)
+    @user = User.find(@user_id)
   end
 
   def landing
+    redirect_to action: :show
   end
 end

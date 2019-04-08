@@ -6,11 +6,11 @@
 // All it does is render <div>Hello Vue</div> at the bottom of the page.
 
 import Vue from 'vue/dist/vue.esm.js';
-import OrcidButton from './OrcidButton.vue'
+import OrcidButton from 'components/OrcidButton.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
-    el: '#dashboard',
+    el: '#vue',
     components: { 'orcid-button': OrcidButton }
   })
 })

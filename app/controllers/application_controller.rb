@@ -3,10 +3,10 @@ class ApplicationController < ActionController::Base
 
   def check_netbadge
     if request.headers['USER'].present?
-      @user = request.headers['USER']
+      @user_id = request.headers['USER']
 
     elsif !Rails.env.production?
-      @user = params['user'] || 'naw4t'
+      @user_id = params['user'] || 'naw4t'
 
     else
       render :not_authorized
