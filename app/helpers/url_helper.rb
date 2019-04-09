@@ -15,7 +15,7 @@ module UrlHelper
   end
 
   def orcid_oauth_url
-    redirect = Rails.application.routes.url_helpers.landing_dashboard_url
+    redirect = Rails.application.routes.url_helpers.landing_orcid_url
     orcid_client_id = Rails.application.credentials.orcid_client_id
     orcid_scopes = Rails.application.credentials.orcid_scopes
     orcid_base_url = Rails.application.credentials.orcid_base_url

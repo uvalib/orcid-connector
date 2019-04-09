@@ -22,13 +22,15 @@ export default {
   data: function(){
     var element = document.getElementById('vue')
     var user = JSON.parse(element.dataset.user)
+    var oauth_url = element.dataset.orcidOauthUrl
     return {
-      user: user
+      user: user,
+      oauth_url: oauth_url
     }
   },
   methods: {
     openOrcid: function (){
-      window.open(this.user, '_blank')
+      window.open(this.oauth_url, '_blank')
     }
   },
   components: {OrcidIdBadge}
