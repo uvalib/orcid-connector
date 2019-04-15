@@ -1,6 +1,9 @@
 class User
+  include ActiveModel::Model
 
-  attr_accessor :user_id, :orcid_id, :orcid_url
+  attr_accessor :user_id, :orcid_id, :orcid_url,
+    :orcid_access_token, :orcid_refresh_token, :orcid_scope,
+    :orcid_refresh_token, :orcid_linked_at, :orcid_expires_in
 
   def self.find user_id
     user = User.new
@@ -12,4 +15,11 @@ class User
     end
     user
   end
+
+  def orcid_expires_at
+    @orcid_expires_at ||= DateTime.current + orcid.expires_in
+  end
+
+
+
 end

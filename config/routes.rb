@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root controller: :dashboard, action: :show
 
-  resource :dashboard, only: [:show] do
+  resource :dashboard, controller: 'dashboard', only: [:show] do
   end
 
   resource :orcid, controller: 'orcid' do

@@ -1,7 +1,6 @@
 class DashboardController < ApplicationController
 
   def show
-    @user = User.find(@user_id)
   end
 
   def landing
