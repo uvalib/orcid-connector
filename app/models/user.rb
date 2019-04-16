@@ -19,7 +19,4 @@ class User
   def orcid_expires_at
     @orcid_expires_at ||= DateTime.current + orcid.expires_in
   end
-
-
-
 end

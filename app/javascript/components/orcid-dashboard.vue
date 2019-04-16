@@ -89,5 +89,9 @@ export default {
   background: #f4f5f6;
   border-radius: .4rem;
 }
+.main.container {
+  margin: 20rem 5rem;;
+
+}
 
 </style>
