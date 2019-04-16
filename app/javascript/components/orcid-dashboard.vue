@@ -1,31 +1,45 @@
 <template>
-  <div v-if="user.orcid_url">
-    <orcid-id-badge v-bind:user="user" />
-  </div>
+  <div class="">
+    <p> UVA Computing ID: <span class="computing-id">{{user.user_id}}</span></p>
+    <div v-if="user.orcid_url">
+      <p>Your ORCID iD is currently linked.</p>
+      <orcid-id-badge v-bind:user="user" />
+      <div class="spacer"></div>
+      <remove-orcid-button v-bind:orcid_removal_path="orcid_removal_path" />
+    </div>
 
-  <div v-else>
-    <button id="connect-orcid-button"
-      @click="openOrcid()">
-      <img id="orcid-id-icon"
-        src="https://orcid.org/sites/default/files/images/orcid_24x24.png"
-        width="24"
-        height="24"
-        alt="ORCID iD icon"
-      />
-          Register or Connect your ORCID iD
-    </button>
+    <div v-else>
+      <button id="connect-orcid-button"
+        @click="openOrcid()">
+        <img id="orcid-id-icon"
+          src="https://orcid.org/sites/default/files/images/orcid_24x24.png"
+          width="24"
+          height="24"
+          alt="ORCID iD icon"
+        />
+            Register or Connect your ORCID iD
+      </button>
+    </div>
   </div>
 </template>
 <script>
 import OrcidIdBadge from './orcid-id-badge'
+import RemoveOrcidButton from './remove-orcid-button'
+import axios from 'axios'
+let token = document.getElementsByName('csrf-token')[0].getAttribute('content')
+axios.defaults.headers.common['X-CSRF-Token'] = token
+axios.defaults.headers.common['Accept'] = 'application/json'
+
 export default {
   data: function(){
     var element = document.getElementById('vue')
     var user = JSON.parse(element.dataset.user)
     var oauth_url = element.dataset.orcidOauthUrl
+    var orcid_removal_path = element.dataset.orcidRemovalPath
     return {
       user: user,
-      oauth_url: oauth_url
+      oauth_url: oauth_url,
+      orcid_removal_path: orcid_removal_path
     }
   },
   methods: {
@@ -33,7 +47,7 @@ export default {
       window.open(this.oauth_url, '_blank')
     }
   },
-  components: {OrcidIdBadge}
+  components: {OrcidIdBadge, RemoveOrcidButton}
 }
 
 </script>
@@ -62,6 +76,18 @@ export default {
   margin: 0 .5em 0 0;
   padding: 0;
   float: left;
+}
+
+.panel {
+  background: #f4f5f6;
+}
+.spacer {
+  height: 10rem;
+}
+.computing-id {
+  padding: .5rem;
+  background: #f4f5f6;
+  border-radius: .4rem;
 }
 
 </style>

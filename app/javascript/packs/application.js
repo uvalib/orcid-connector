@@ -6,4 +6,4 @@
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
-
+require("milligram/dist/milligram.min")

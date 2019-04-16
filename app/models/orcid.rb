@@ -33,9 +33,11 @@ module Orcid
   # delete specified user's ORCID attributes
   #
   def self.remove(user)
-    url = "#{self.url}/cid/#{id}?auth=#{self.authtoken}"
-    status, _ = rest_delete( url )
-    return status
+    path = "/cid/#{user.user_id}"
+    response = self.delete(path,
+                        query: auth
+                       )
+    return response
   end
 
   def self.token_exchange code
