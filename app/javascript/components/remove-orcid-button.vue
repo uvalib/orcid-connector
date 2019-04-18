@@ -1,8 +1,7 @@
 <template>
   <div >
-    <p>No longer want to have your ORCID iD linked?</p>
     <a v-on:click="destroyOrcid()" class="button button-red">
-      Remove my ORCID iD
+      Disconnect my ORCID iD
     </a>
   </div>
 

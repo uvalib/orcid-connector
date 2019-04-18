@@ -8,6 +8,11 @@
     </div>
 
     <p> UVA Computing ID: <span class="computing-id">{{user.user_id}}</span></p>
+    <ul>
+      <li>When you create or connect your ORCID iD, your ORCID iD is validated as belonging to you.</li>
+      <li>When you connect your ORCID iD to UVA, your ORCID iD is registered as belonging to a member of the University of Virginia research community.</li>
+      <li>Find out more about <a href="https://www.library.virginia.edu/libra/orcid-at-uva/">ORCID at UVA</a>.</li>
+  </ul>
     <div v-if="user.orcid_url">
       <p>Your ORCID iD is currently linked.</p>
       <orcid-id-badge v-bind:user="user" />
