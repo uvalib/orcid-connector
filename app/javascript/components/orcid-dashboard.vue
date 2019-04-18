@@ -1,5 +1,12 @@
 <template>
   <div class="">
+    <div class="row">
+      <div class="column column-50">
+        <p v-if="flash.notice" class="flash notice">{{flash.notice}}</p>
+        <p v-if="flash.alert" class='flash alert'>{{flash.alert}}</p>
+      </div>
+    </div>
+
     <p> UVA Computing ID: <span class="computing-id">{{user.user_id}}</span></p>
     <div v-if="user.orcid_url">
       <p>Your ORCID iD is currently linked.</p>
@@ -36,10 +43,12 @@ export default {
     var user = JSON.parse(element.dataset.user)
     var oauth_url = element.dataset.orcidOauthUrl
     var orcid_removal_path = element.dataset.orcidRemovalPath
+    var flash_messages = JSON.parse(element.dataset.flash)
     return {
       user: user,
       oauth_url: oauth_url,
-      orcid_removal_path: orcid_removal_path
+      orcid_removal_path: orcid_removal_path,
+      flash: flash_messages
     }
   },
   methods: {
@@ -51,7 +60,7 @@ export default {
 }
 
 </script>
-<style scoped>
+<style scoped lang="scss">
 #connect-orcid-button{
   border: 1px solid #D3D3D3;
   padding: .3em;
@@ -91,7 +100,17 @@ export default {
 }
 .main.container {
   margin: 20rem 5rem;;
-
+}
+.flash {
+  border-radius: .5rem;
+  text-align: center;
+  &.notice {
+    color: white;
+    background-color: green;
+  }
+  &.alert {
+    background-color: red;
+  }
 }
 
 </style>

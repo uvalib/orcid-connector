@@ -5,18 +5,20 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <meta name=viewport content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application' %>
     <%= javascript_pack_tag 'orcid_vue' %>
-    <link rel='import' href='https://www.library.virginia.edu/bower_components/uvalib-header/uvalib-header.html'>
-    <link rel='import' href='https://www.library.virginia.edu/bower_components/uvalib-footer/uvalib-footer.html'>
+    <link rel='import' href='https://www.library.virginia.edu/bower_components/uvalib-theme/uvalib-theme.html' />
+    <link rel='import' href='https://www.library.virginia.edu/bower_components/uvalib-header/uvalib-header.html' />
+    <link rel='import' href='https://www.library.virginia.edu/bower_components/uvalib-footer/uvalib-footer.html' />
 
   </head>
 
   <body>
     <uvalib-header>
     </uvalib-header>
-    <div class="container" style="margin: 10rem 0;" >
+    <div class="container" style="margin: 10rem auto;" >
       <%= yield %>
     </div>
     <uvalib-footer />

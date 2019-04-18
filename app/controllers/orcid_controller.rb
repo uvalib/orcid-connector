@@ -20,10 +20,11 @@ class OrcidController < ApplicationController
 
   def destroy
     if Orcid.remove(current_user)
-      status = 'Your ORCID ID was successfully removed'
+      status = 'Your ORCID iD was successfully removed.'
     else
-      status = 'The was a problem removing your ORCID ID'
+      status = 'The was a problem removing your ORCID iD.'
     end
+    flash[:notice] = status
     render json: {status: status}
   end
 end

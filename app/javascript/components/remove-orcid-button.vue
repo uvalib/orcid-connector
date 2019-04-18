@@ -1,7 +1,7 @@
 <template>
   <div >
     <p>No longer want to have your ORCID iD linked?</p>
-    <a v-on:click="destroyOrcid()" class="button">
+    <a v-on:click="destroyOrcid()" class="button button-red">
       Remove my ORCID iD
     </a>
   </div>
@@ -26,5 +26,10 @@ export default {
 </script>
 
 <style scoped>
+.button-red {
+  background-color: #E00000;
+  color: white;
+  border-color: black;
+}
 
 </style>
