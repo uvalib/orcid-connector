@@ -14,7 +14,7 @@
       <li>Find out more about <a href="https://www.library.virginia.edu/libra/orcid-at-uva/">ORCID at UVA</a>.</li>
   </ul>
     <div v-if="user.orcid_url">
-      <p>Your ORCID iD is currently linked.</p>
+      <p>Your ORCID iD is currently registered with UVA.</p>
       <orcid-id-badge v-bind:user="user" />
       <div class="spacer"></div>
       <remove-orcid-button v-bind:orcid_removal_path="orcid_removal_path" />

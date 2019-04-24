@@ -5,11 +5,11 @@ class ApplicationController < ActionController::Base
     if request.headers['USER'].present?
       @user_id = request.headers['USER']
 
-    elsif !Rails.env.production?
+    elsif !Rails.env.production? || ENV['SKIP_NETBADGE']
       @user_id = params['user'] || 'abc123'
 
     else
-      render :not_authorized
+      redirect_to :not_found
       return false
     end
     @current_user = User.find(@user_id)

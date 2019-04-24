@@ -1,0 +1,17 @@
+/node_modules
+/config/master.key
+/storage/*
+/log/*
+/tmp/*
+.git
+.gitignore
+.dockerignore
+env.*
+docker-compose.yml
+hostfs
+spec
+test
+scripts/helpers
+scripts/docker
+public/assets
+public/system
