@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
       @user_id = params['user'] || 'abc123'
 
     else
-      redirect_to :not_found
+      redirect_to '/404'
       return false
     end
     @current_user = User.find(@user_id)
