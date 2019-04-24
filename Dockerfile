@@ -26,7 +26,7 @@ ADD . $APP_HOME
 
 # workaround for yarn issue
 RUN npm rebuild node-sass
-RUN bundle exec rails assets:precompile
+RUN SECRET_KEY_BASE=x bundle exec rails assets:precompile 
 
 # Update permissions
 RUN chown -R docker $APP_HOME && chgrp -R sse $APP_HOME
