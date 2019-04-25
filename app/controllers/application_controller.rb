@@ -2,9 +2,8 @@ class ApplicationController < ActionController::Base
   before_action :check_netbadge
 
   def check_netbadge
-    Rails.logger.info request.headers.inspect
-    if request.headers['REMOTE_USER'].present?
-      @user_id = request.headers['REMOTE_USER']
+    if request.headers['HTTP_REMOTE_USER'].present?
+      @user_id = request.headers['HTTP_REMOTE_USER']
 
     elsif !Rails.env.production? || ENV['SKIP_NETBADGE']
       @user_id = params['user'] || 'test'
