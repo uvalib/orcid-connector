@@ -1,10 +1,10 @@
 module Orcid
   include HTTParty
-  base_uri Rails.application.credentials.orcid_access_url
+  base_uri ENV['ORCID_ACCESS_URL']
   format :json
 
   def self.auth
-    @@auth ||= {auth: Rails.application.credentials.service_api_token}
+    @@auth ||= {auth: ENV['SERVICE_API_TOKEN']}
   end
 
   def self.find_user cid
@@ -42,11 +42,11 @@ module Orcid
 
   def self.token_exchange code
     begin
-      path = "#{Rails.application.credentials.orcid_base_url}/oauth/token"
+      path = "#{ENV['ORCID_BASE_URL']}/oauth/token"
       self.post(path, {
         body: {
-          client_id: Rails.application.credentials.orcid_client_id,
-          client_secret: Rails.application.credentials.orcid_client_secret,
+          client_id: ENV['ORCID_CLIENT_ID'],
+          client_secret: ENV['ORCID_CLIENT_SECRET'],
           grant_type: 'authorization_code',
           code: code
           #   redirect_uri: landing_orcid_url
@@ -93,4 +93,3 @@ module Orcid
     return h.to_json
   end
 end
-

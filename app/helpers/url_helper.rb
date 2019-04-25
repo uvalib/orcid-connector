@@ -16,9 +16,9 @@ module UrlHelper
 
   def orcid_oauth_url
     redirect = Rails.application.routes.url_helpers.landing_orcid_url
-    orcid_client_id = Rails.application.credentials.orcid_client_id
-    orcid_scopes = Rails.application.credentials.orcid_scopes
-    orcid_base_url = Rails.application.credentials.orcid_base_url
+    orcid_client_id = ENV['ORCID_CLIENT_ID']
+    orcid_scopes = ENV['ORCID_SCOPES']
+    orcid_base_url = ENV['ORCID_BASE_URL']
 
     "#{orcid_base_url}/oauth/authorize?client_id=#{orcid_client_id}&response_type=code&scope=#{orcid_scopes}&redirect_uri=#{redirect}"
   end
