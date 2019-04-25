@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :check_netbadge
 
   def check_netbadge
-    Rails.logger.info request.headers
+    Rails.logger.info request.headers.inspect
     if request.headers['REMOTE_USER'].present?
       @user_id = request.headers['REMOTE_USER']
 
