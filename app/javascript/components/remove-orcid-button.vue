@@ -1,8 +1,8 @@
 <template>
   <div >
-    <a v-on:click="destroyOrcid()" class="button button-red">
+    <button v-on:click="destroyOrcid()" class="button button-gray">
       Disconnect my ORCID iD
-    </a>
+    </button>
   </div>
 
 </template>
@@ -25,9 +25,9 @@ export default {
 </script>
 
 <style scoped>
-.button-red {
-  background-color: #E00000;
-  color: white;
+.button-gray {
+  background-color: #EEEEEE;
+  color: black;
   border-color: black;
 }
 

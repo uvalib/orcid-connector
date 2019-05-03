@@ -1,10 +1,15 @@
 <template>
-  <p class="orcid-panel">ORCID iD:
+  <div class="orcid-panel">
+    <span class="same-width">ORCID iD:</span>
     <a :href="user.orcid_url">
       <img src='images/orcid-id-logo.svg' alt="orcid logo" class="orcid-circle" />
       {{user.orcid_url}}
     </a>
-  </p>
+    <p class="registration-text">
+      <span class="same-width"></span>
+      Your ORCID iD is currently registered with UVA. There are no further actions you need to take.
+    </p>
+  </div>
 
 </template>
 <script>
@@ -25,6 +30,14 @@ export default {
     padding: 1rem;
     margin: 1rem;
     background: #f4f5f6;
+    margin-bottom: 2rem;
+  }
+  .same-width {
+    display: inline-block;
+    width: 12rem;
+  }
+  .registration-text {
+    padding: 1rem;
   }
 }
 </style>

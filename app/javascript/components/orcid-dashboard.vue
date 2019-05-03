@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="dashboard">
     <div class="row">
       <div class="column column-50">
         <p v-if="flash.notice" class="flash notice">{{flash.notice}}</p>
@@ -8,16 +8,9 @@
     </div>
 
     <p> UVA Computing ID: <span class="computing-id">{{user.user_id}}</span></p>
-    <ul>
-      <li>When you create or connect your ORCID iD, your ORCID iD is validated as belonging to you.</li>
-      <li>When you connect your ORCID iD to UVA, your ORCID iD is registered as belonging to a member of the University of Virginia research community.</li>
-      <li>Find out more about <a href="https://www.library.virginia.edu/libra/orcid-at-uva/">ORCID at UVA</a>.</li>
-  </ul>
+
     <div v-if="user.orcid_url">
-      <p>Your ORCID iD is currently registered with UVA.</p>
       <orcid-id-badge v-bind:user="user" />
-      <div class="spacer"></div>
-      <remove-orcid-button v-bind:orcid_removal_path="orcid_removal_path" />
     </div>
 
     <div v-else>
@@ -31,7 +24,20 @@
         />
             Register or Connect your ORCID iD
       </button>
+
+      <div class="spacer"></div>
     </div>
+
+    <h4>Learn about ORCID</h4>
+    <ul>
+      <li>When you create or connect your ORCID iD, your ORCID iD is validated as belonging to you.</li>
+      <li>When you connect your ORCID iD to UVA, your ORCID iD is registered as belonging to a member of the University of Virginia research community.</li>
+      <li><a href="https://www.library.virginia.edu/libra/orcid-at-uva/" >Find out more about ORCID at UVA</a>.</li>
+    </ul>
+
+    <div class="spacer"></div>
+    <remove-orcid-button v-if="user.orcid_url" v-bind:orcid_removal_path="orcid_removal_path" />
+
   </div>
 </template>
 <script>
