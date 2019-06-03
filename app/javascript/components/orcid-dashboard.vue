@@ -32,7 +32,7 @@
     <ul>
       <li>When you create or connect your ORCID iD, your ORCID iD is validated as belonging to you.</li>
       <li>When you connect your ORCID iD to UVA, your ORCID iD is registered as belonging to a member of the University of Virginia research community.</li>
-      <li><a href="https://www.library.virginia.edu/libra/orcid-at-uva/" >Find out more about ORCID at UVA</a>.</li>
+      <li><a href="https://www.library.virginia.edu/services/orcid-at-uva/" target='_blank' >Find out more about ORCID at UVA</a>.</li>
     </ul>
 
     <div class="spacer"></div>
