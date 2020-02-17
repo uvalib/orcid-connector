@@ -2,7 +2,7 @@ module Orcid
   include HTTParty
   base_uri ENV['ORCID_ACCESS_URL']
   format :json
-  default_timeout 20
+  default_timeout 5
 
   def self.auth
     @@auth ||= {auth: ENV['SERVICE_API_TOKEN']}
@@ -15,6 +15,9 @@ module Orcid
     else
       {}
     end
+  rescue Net::OpenTimeout => e
+    Rails.logger.error "Orcid Timeout: #{e}"
+    return {'error' => 'Can not reach the ORCID service'}
   end
 
   #

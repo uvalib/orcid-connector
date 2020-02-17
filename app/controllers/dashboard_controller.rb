@@ -1,5 +1,7 @@
 class DashboardController < ApplicationController
 
+  before_action :check_netbadge
+
   def show
   end
 

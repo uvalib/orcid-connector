@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  before_action :check_netbadge
 
   def check_netbadge
     if request.headers['HTTP_REMOTE_USER'].present?

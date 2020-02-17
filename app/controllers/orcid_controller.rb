@@ -2,6 +2,8 @@ class OrcidController < ApplicationController
   # Adds ORCID handling behavior to the controller.
   include OrcidBehavior
 
+  before_action :check_netbadge
+
   def landing
     #register orcid
     orcid_response = Orcid.token_exchange(params[:code])

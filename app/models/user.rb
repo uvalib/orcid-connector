@@ -3,7 +3,7 @@ class User
 
   attr_accessor :user_id, :orcid_id, :orcid_url,
     :orcid_access_token, :orcid_refresh_token, :orcid_scope,
-    :orcid_refresh_token, :orcid_linked_at, :orcid_expires_in
+    :orcid_linked_at, :orcid_expires_in
 
   def self.find user_id
     user = User.new
@@ -12,6 +12,8 @@ class User
     if o_user.present?
       user.orcid_id = o_user['orcid']
       user.orcid_url = o_user['uri']
+      user.orcid_access_token = o_user['oauth_access_token']
+      user.errors['base'] << o_user['error'] if o_user['error']
     end
     user
   end
