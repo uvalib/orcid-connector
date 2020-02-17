@@ -2,6 +2,7 @@ module Orcid
   include HTTParty
   base_uri ENV['ORCID_ACCESS_URL']
   format :json
+  default_timeout 20
 
   def self.auth
     @@auth ||= {auth: ENV['SERVICE_API_TOKEN']}
