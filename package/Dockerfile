@@ -6,7 +6,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
 RUN apk update && apk add --update-cache nodejs nodejs-npm sqlite-dev \
-  build-base linux-headers yarn tzdata \
+  build-base linux-headers yarn tzdata bash \
   && rm -rf /var/cache/apk/*
 
 # create the work directory
@@ -28,10 +28,15 @@ ADD . $APP_HOME
 RUN npm rebuild node-sass
 RUN SECRET_KEY_BASE=x bundle exec rails assets:precompile
 
+EXPOSE 8080
+CMD scripts/entry.sh
+
 # Update permissions
 RUN chown -R docker $APP_HOME && chgrp -R sse $APP_HOME
+
+# Add the build tag
+ARG BUILD_TAG
+RUN test -n "$BUILD_TAG" && touch $APP_HOME/buildtag.build-$BUILD_TAG || touch $APP_HOME/buildtag.build-0
+
 # Set user
 USER docker
-
-EXPOSE 3000
-CMD scripts/entry.sh

@@ -35,3 +35,7 @@ yarn-debug.log*
 .yarn-integrity
 .vscode
 .DS_Store
+
+.idea
+.generators
+.rakeTasks
