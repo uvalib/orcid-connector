@@ -62,13 +62,13 @@ Rails.application.configure do
 
   # These ENV need to exist in production and are provided here for convenience
 
-  ENV['ORCID_BASE_URL'] = Rails.application.credentials.orcid_base_url
-  ENV['ORCID_CLIENT_ID'] = Rails.application.credentials.orcid_client_id
-  ENV['ORCID_CLIENT_SECRET'] = Rails.application.credentials.orcid_client_secret
-  ENV['ORCID_SCOPES'] = Rails.application.credentials.orcid_scopes
+  ENV['ORCID_BASE_URL'] ||= Rails.application.credentials.orcid_base_url
+  ENV['ORCID_CLIENT_ID'] ||= Rails.application.credentials.orcid_client_id
+  ENV['ORCID_CLIENT_SECRET'] ||= Rails.application.credentials.orcid_client_secret
+  ENV['ORCID_SCOPES'] ||= Rails.application.credentials.orcid_scopes
 
-  ENV['ORCID_ACCESS_URL'] = Rails.application.credentials.orcid_access_url
-  ENV['SERVICE_API_TOKEN'] = Rails.application.credentials.service_api_token
+  ENV['ORCID_ACCESS_URL'] ||= Rails.application.credentials.orcid_access_url
+  ENV['SERVICE_API_TOKEN'] ||= Rails.application.credentials.service_api_token
   ENV['API_TOKEN'] ||= Rails.application.credentials.API_TOKEN
 
 end
