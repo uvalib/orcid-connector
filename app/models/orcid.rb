@@ -9,15 +9,39 @@ module Orcid
   end
 
   def self.find_user cid
-    response = self.get("/cid/#{cid}", query: auth)
-    if response.success?
-      response['results'].first
-    else
-      {}
+
+    begin
+      response = self.get("/cid/#{cid}", query: auth)
+      if response.success?
+        response['results'].first
+      else
+        {}
+      end
+    rescue Net::OpenTimeout => e
+      Rails.logger.error "ORCID Timeout: #{e}"
+      return {'error' => 'Timeout connecting to ORCID service'}
+    rescue Errno::ECONNREFUSED => e
+      Rails.logger.error "ORCID Refused: #{e}"
+      return {'error' => 'Connection refused to ORCID service'}
     end
-  rescue Net::OpenTimeout => e
-    Rails.logger.error "Orcid Timeout: #{e}"
-    return {'error' => 'Can not reach the ORCID service'}
+  end
+
+  def self.healthcheck
+
+    begin
+      response = self.get("/healthcheck")
+      if response.success?
+        true
+      else
+        false
+      end
+    rescue Net::OpenTimeout => e
+      Rails.logger.error "Timeout connecting to ORCID service #{e}"
+      false
+    rescue Errno::ECONNREFUSED => e
+      Rails.logger.error "Connection refused to ORCID service #{e}"
+      false
+    end
   end
 
   #
