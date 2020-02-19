@@ -13,7 +13,7 @@ module Orcid
       # otherwise use the preconfigured auth token instead
       token = ENV['SERVICE_API_TOKEN']
     end
-    
+
     return {auth: token}
   end
 
