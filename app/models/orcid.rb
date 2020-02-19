@@ -5,7 +5,16 @@ module Orcid
   default_timeout 5
 
   def self.auth
-    @@auth ||= {auth: ENV['SERVICE_API_TOKEN']}
+
+    # if we have a secret configured, use that to create a JWT
+    if ENV[ 'AUTH_SHARED_SECRET' ].nil? == false
+      token = jwt_auth_token( ENV[ 'AUTH_SHARED_SECRET' ] )
+    else
+      # otherwise use the preconfigured auth token instead
+      token = ENV['SERVICE_API_TOKEN']
+    end
+    
+    return {auth: token}
   end
 
   def self.find_user cid
@@ -119,5 +128,18 @@ module Orcid
 
     #puts "==> #{h.to_json}"
     return h.to_json
+  end
+
+  # create a time limited JWT for service authentication
+  def self.jwt_auth_token( secret )
+
+    # expire in 5 minutes
+    exp = Time.now.to_i + 5 * 60
+
+    # just a standard claim
+    exp_payload = { exp: exp }
+
+    return JWT.encode exp_payload, secret, 'HS256'
+
   end
 end

@@ -27,7 +27,8 @@ module UrlHelper
 
   def hostname
     return ENV['SERVICE_CNAME'] unless Rails.env.development?
-    return 'localhost:3000'
+    port = Rails::Server::Options.new.parse!(ARGV)[:Port] || 3000 rescue 3000
+    return "localhost:#{port}"
   end
 
   def protocol
