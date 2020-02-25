@@ -66,6 +66,7 @@ Rails.application.configure do
   ENV['ORCID_CLIENT_ID'] ||= Rails.application.credentials.orcid_client_id
   ENV['ORCID_CLIENT_SECRET'] ||= Rails.application.credentials.orcid_client_secret
   ENV['ORCID_SCOPES'] ||= Rails.application.credentials.orcid_scopes
+  ENV['ORCID_API_URL'] ||= Rails.application.credentials.orcid_api_url
 
   ENV['ORCID_ACCESS_URL'] ||= Rails.application.credentials.orcid_access_url
   ENV['SERVICE_API_TOKEN'] ||= Rails.application.credentials.service_api_token
