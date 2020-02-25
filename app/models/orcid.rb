@@ -35,6 +35,23 @@ module Orcid
     end
   end
 
+  def self.all_users
+    begin
+      response = self.get("/cid", query: auth)
+      if response.success?
+        response['results']
+      else
+        []
+      end
+    rescue Net::OpenTimeout => e
+      Rails.logger.error "ORCID Timeout: #{e}"
+      return {'error' => 'Timeout connecting to ORCID service'}
+    rescue Errno::ECONNREFUSED => e
+      Rails.logger.error "ORCID Refused: #{e}"
+      return {'error' => 'Connection refused to ORCID service'}
+    end
+  end
+
   def self.healthcheck
 
     begin
@@ -169,7 +186,7 @@ module Orcid
       return true
     else
       # create employment failure
-      byebug
+      puts "Failed to create UVA Employment in ORCID: #{created_resp}"
       Rails.logger.error "Failed to create UVA Employment in ORCID: #{created_resp}"
     end
   end
