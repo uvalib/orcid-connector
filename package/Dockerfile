@@ -1,4 +1,4 @@
-FROM ruby:2.6.5-alpine
+FROM ruby:2.6.6-alpine3.13
 
 # set the timezone appropriatlyENV TZ=UTC
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -6,7 +6,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
 RUN apk update && apk add --update-cache nodejs nodejs-npm sqlite-dev \
-  build-base linux-headers yarn tzdata bash \
+  build-base linux-headers yarn tzdata bash python2 \
   && rm -rf /var/cache/apk/*
 
 # create the work directory
@@ -40,3 +40,7 @@ RUN test -n "$BUILD_TAG" && touch $APP_HOME/buildtag.build-$BUILD_TAG || touch $
 
 # Set user
 USER docker
+
+#
+# end of file
+#
