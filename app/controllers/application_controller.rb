@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
     if request.headers['HTTP_REMOTE_USER'].present?
       @user_id = request.headers['HTTP_REMOTE_USER']
 
+      # Temporary
+      if @user_id == 'naw4t'
+        Rails.logger.info(request.headers)
+      end
+
     elsif !Rails.env.production? || ENV['SKIP_NETBADGE']
       @user_id = params['user'] || 'test'
 
