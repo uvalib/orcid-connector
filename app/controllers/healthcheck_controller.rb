@@ -16,9 +16,11 @@ class HealthcheckController < ApplicationController
   class HealthCheckResponse
 
     attr_accessor :orcid_service
+    attr_accessor :userinfo_service
 
     def is_healthy?
-      @orcid_service.healthy
+      @orcid_service.healthy &&
+      @userinfo_service.healthy
     end
   end
 
@@ -39,6 +41,7 @@ class HealthcheckController < ApplicationController
   def make_response
     r = HealthCheckResponse.new
     r.orcid_service = orcid_service_health
+    r.userinfo_service = userinfo_service_health
 
     return( r )
   end
@@ -46,6 +49,11 @@ class HealthcheckController < ApplicationController
   def orcid_service_health
     status = Orcid.healthcheck
     return Health.new(status, status == true ? "" : "ORCID Service (#{Orcid.base_uri}) unavailable")
+  end
+
+  def userinfo_service_health
+    status = UserInfoClient.healthcheck
+    return Health.new(status, status == true ? "" : "UserInfo Service (#{UserInfoClient.base_uri}) unavailable")
   end
 
 end

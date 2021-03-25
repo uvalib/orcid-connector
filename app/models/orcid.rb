@@ -80,8 +80,8 @@ module Orcid
                         query: auth,
                         body: payload
                        )
-    if response.success? && needs_employment?(user)
-      create_uva_employment(user)
+    if !response.success?
+      Rails.logger.error("Error updating ORCID: #{response.body}")
     end
     return response
   end
@@ -94,6 +94,9 @@ module Orcid
     response = self.delete(path,
                         query: auth
                        )
+    if !response.success?
+      Rails.logger.error("Error removing ORCID: #{response.body}")
+    end
     return response
   end
 
@@ -123,72 +126,10 @@ module Orcid
     h['oauth_refresh_token'] = user.orcid_refresh_token
     h['scope'] = user.orcid_scope
 
+    descriptions =  UserInfoClient.find_user(user.user_id)['description']
+    h['user_types'] = descriptions.join(';') if descriptions.present?
+
     return h.to_json
-  end
-
-  def self.employment_payload
-    <<-EMPLOYMENT.squish
-    <?xml version="1.0" encoding="UTF-8"?>
-    <employment:employment
-      xmlns:employment="http://www.orcid.org/ns/employment" xmlns:common="http://www.orcid.org/ns/common"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.orcid.org/ns/employment ../employment-2.0.xsd ">
-    <employment:organization>
-      <common:name>University of Virginia</common:name>
-      <common:address>
-        <common:city>Charlottesville</common:city>
-        <common:region>VA</common:region>
-        <common:country>US</common:country>
-      </common:address>
-      <common:disambiguated-organization>
-        <common:disambiguated-organization-identifier>2358</common:disambiguated-organization-identifier>
-        <common:disambiguation-source>RINGGOLD</common:disambiguation-source>
-        </common:disambiguated-organization>
-    </employment:organization>
-    </employment:employment>
-    EMPLOYMENT
-  end
-
-  def self.needs_employment?(user)
-    resp = self.get("/#{user.orcid_id}/employments", base_uri: ENV['ORCID_API_URL'], headers: {
-      "Authorization" => "Bearer #{user.orcid_access_token}",
-      "Accept" => "application/json",
-      "Content-Type" => "application/json"
-    })
-    if resp.success?
-      body = resp.parsed_response
-      uva_employment = body['employment-summary'].find {|e| e.dig('source', 'source-client-id', 'path') == ENV['ORCID_CLIENT_ID'] }
-      if uva_employment.nil?
-        return true
-      else
-        # Employment already added
-        return false
-      end
-    else
-      #employment check failure
-      Rails.logger.error "Failed to check UVA Employment in ORCID: #{resp}"
-    end
-  end
-
-  def self.create_uva_employment(user)
-    # Add uva employment
-    created_resp = self.post("/#{user.orcid_id}/employment",
-      base_uri: ENV["ORCID_API_URL"],
-      format: :xml,
-      body: employment_payload,
-      headers: {
-        "Authorization" => "Bearer #{user.orcid_access_token}",
-        "content-type" => "application/xml",
-        "accept" => "application/xml"
-      })
-    if created_resp.code == 201
-      Rails.logger.info "UVA employment for #{user.user_id} successfully added"
-      return true
-    else
-      # create employment failure
-      puts "Failed to create UVA Employment in ORCID: #{created_resp}"
-      Rails.logger.error "Failed to create UVA Employment in ORCID: #{created_resp}"
-    end
   end
 
   #

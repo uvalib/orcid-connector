@@ -69,6 +69,7 @@ Rails.application.configure do
   ENV['ORCID_API_URL'] ||= Rails.application.credentials.orcid_api_url
 
   ENV['ORCID_ACCESS_URL'] ||= Rails.application.credentials.orcid_access_url
+  ENV['USERINFO_URL'] ||= Rails.application.credentials.user_info_url
   ENV['SERVICE_API_TOKEN'] ||= Rails.application.credentials.service_api_token
   ENV['AUTH_SHARED_SECRET'] ||= Rails.application.credentials.AUTH_SHARED_SECRET
   ENV['API_TOKEN'] ||= Rails.application.credentials.API_TOKEN
