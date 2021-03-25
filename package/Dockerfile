@@ -19,6 +19,7 @@ WORKDIR $APP_HOME
 RUN addgroup -g 18570 sse && adduser -G sse -u 1985 -D docker
 
 COPY Gemfile Gemfile.lock package.json yarn.lock ./
+RUN gem install bundler
 RUN bundle install --jobs=4 --without=["development" "test"] --no-cache
 
 # copy the application
