@@ -14,7 +14,7 @@ namespace :orcid do
 
   desc "Updates UVA employment and education for all linked orcid accounts"
   task :correct_one, [:user_id] => [:environment] do |t, args|
-    user = Orcid.find_user(args.user_id])
+    user = Orcid.find_user(args.user_id)
     puts "processing #{user['cid']}: #{user['orcid']}"
     correct_orcid(user)
   end
@@ -37,7 +37,7 @@ namespace :orcid do
     orcid_has = orcid_emp_edu(user)
 
     # find if emp and/or edu should be applied
-    user_needs = {emp: false, edu: false}
+    user_needs = {edu: false, emp: false}
     user_info['description'].each do |role|
       if role.match? /Staff|Employee|Faculty/i
         user_needs[:emp] = true
@@ -62,7 +62,7 @@ namespace :orcid do
       remove_orcid(user, 'education', orcid_has[:edu][:put_code])
     else
       # everything is fine
-      puts "Nothing changed for #{user.user_id}"
+      puts "Nothing changed for #{user.user_id}; user needed: #{user_needs}, orcid_has: #{orcid_has}"
     end
   end
 
