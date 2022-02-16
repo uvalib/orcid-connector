@@ -1,11 +1,11 @@
-FROM ruby:2.6.6-alpine3.13
+FROM public.ecr.aws/docker/library/ruby:2.6.9-alpine3.14
 
 # set the timezone appropriatlyENV TZ=UTC
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # set the locale correctly
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
-RUN apk update && apk add --update-cache nodejs nodejs-npm sqlite-dev \
+RUN apk update && apk add --update-cache nodejs npm sqlite-dev \
   build-base linux-headers yarn tzdata bash python2 shared-mime-info \
   && rm -rf /var/cache/apk/*
 
@@ -19,7 +19,7 @@ WORKDIR $APP_HOME
 RUN addgroup -g 18570 sse && adduser -G sse -u 1985 -D docker
 
 COPY Gemfile Gemfile.lock package.json yarn.lock ./
-RUN gem install bundler && bundle install --jobs=4 --without=["development" "test"] --no-cache
+RUN gem install bundler -v 1.17.3 && bundle install --jobs=4 --without=["development" "test"] --no-cache
 
 # copy the application
 ADD . $APP_HOME
