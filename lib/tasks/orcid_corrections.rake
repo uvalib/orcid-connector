@@ -124,8 +124,8 @@ namespace :orcid do
         <common:country>US</common:country>
       </common:address>
       <common:disambiguated-organization>
-        <common:disambiguated-organization-identifier>2358</common:disambiguated-organization-identifier>
-        <common:disambiguation-source>RINGGOLD</common:disambiguation-source>
+        <common:disambiguated-organization-identifier>https://ror.org/0153tk833</common:disambiguated-organization-identifier>
+        <common:disambiguation-source>ROR</common:disambiguation-source>
       </common:disambiguated-organization>
     </common:organization>
   </employment:employment>
@@ -145,8 +145,8 @@ namespace :orcid do
         <common:country>US</common:country>
       </common:address>
       <common:disambiguated-organization>
-        <common:disambiguated-organization-identifier>2358</common:disambiguated-organization-identifier>
-        <common:disambiguation-source>RINGGOLD</common:disambiguation-source>
+        <common:disambiguated-organization-identifier>https://ror.org/0153tk833</common:disambiguated-organization-identifier>
+        <common:disambiguation-source>ROR</common:disambiguation-source>
       </common:disambiguated-organization>
     </common:organization>
   </education:education>
