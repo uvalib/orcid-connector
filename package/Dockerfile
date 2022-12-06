@@ -1,4 +1,4 @@
-FROM public.ecr.aws/docker/library/ruby:2.6.9-alpine3.14
+FROM public.ecr.aws/docker/library/ruby:2.6.10-alpine3.14
 
 # set the timezone appropriatlyENV TZ=UTC
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
