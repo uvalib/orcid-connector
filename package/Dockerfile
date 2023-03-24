@@ -6,7 +6,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
 RUN apk update && apk add --update-cache nodejs npm sqlite-dev \
-  build-base linux-headers yarn tzdata bash python2 shared-mime-info \
+  build-base linux-headers yarn tzdata bash python2 shared-mime-info curl \
   && rm -rf /var/cache/apk/*
 
 # create the work directory
