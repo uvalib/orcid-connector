@@ -20,6 +20,8 @@ module UserInfoClient
       Rails.logger.error "UserInfo Timeout: #{e}"
     rescue Errno::ECONNREFUSED => e
       Rails.logger.error "UserInfo Refused: #{e}"
+    rescue SocketError => e
+      Rails.logger.error "UserInfo SocketError: #{e}"
     end
     return {}
   end
@@ -38,6 +40,9 @@ module UserInfoClient
       false
     rescue Errno::ECONNREFUSED => e
       Rails.logger.error "Connection refused to UserInfo service #{e}"
+      false
+    rescue SocketError => e
+      Rails.logger.error "UserInfo SocketError: #{e}"
       false
     end
   end
