@@ -26,7 +26,7 @@ module Orcid
       else
         {}
       end
-    rescue Net::OpenTimeout => e
+    rescue Net::OpenTimeout, Net::ReadTimeout => e
       Rails.logger.error "ORCID Timeout: #{e}"
       return {'error' => 'Timeout connecting to ORCID service'}
     rescue Errno::ECONNREFUSED => e
@@ -43,7 +43,7 @@ module Orcid
       else
         []
       end
-    rescue Net::OpenTimeout => e
+    rescue Net::OpenTimeout, Net::ReadTimeout => e
       Rails.logger.error "ORCID Timeout: #{e}"
       return {'error' => 'Timeout connecting to ORCID service'}
     rescue Errno::ECONNREFUSED => e
@@ -61,7 +61,7 @@ module Orcid
       else
         false
       end
-    rescue Net::OpenTimeout => e
+    rescue Net::OpenTimeout, Net::ReadTimeout => e
       Rails.logger.error "Timeout connecting to ORCID service #{e}"
       false
     rescue Errno::ECONNREFUSED => e

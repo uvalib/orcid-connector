@@ -16,7 +16,7 @@ module UserInfoClient
       if response.success?
         return response['user']
       end
-    rescue Net::OpenTimeout => e
+    rescue Net::OpenTimeout, Net::ReadTimeout => e
       Rails.logger.error "UserInfo Timeout: #{e}"
     rescue Errno::ECONNREFUSED => e
       Rails.logger.error "UserInfo Refused: #{e}"
@@ -33,7 +33,7 @@ module UserInfoClient
       else
         false
       end
-    rescue Net::OpenTimeout => e
+    rescue Net::OpenTimeout, Net::ReadTimeout => e
       Rails.logger.error "Timeout connecting to UserInfo service #{e}"
       false
     rescue Errno::ECONNREFUSED => e
