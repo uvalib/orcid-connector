@@ -19,8 +19,9 @@ class HealthcheckController < ApplicationController
     attr_accessor :userinfo_service
 
     def is_healthy?
+      # dont want to continuously restart the container when the services are unavailable
       #@orcid_service.healthy && @userinfo_service.healthy
-      @orcid_service.healthy # dont want to continuously restart the container when the user service is unavailable
+      true
     end
   end
 
