@@ -10,8 +10,8 @@ module OrcidBehavior
       return false
     end
 
-    # Check for temporary auth
-    expires_in = o_response['expires_in']
+    # Check for temporary auth (expires_in is a string, previously it came as an integer)
+    expires_in = o_response['expires_in'].to_i
     one_time_access = expires_in.seconds < 1.day
     if one_time_access
       flash['error'] = 'Please be sure to leave "Allow this permission until I revoke it" checked on the ORCID authorization page.'
